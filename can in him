@@ -1,0 +1,56 @@
+import time
+import sys
+
+
+delay_per_huruf = 0.09  
+delay_per_baris = 1.5  
+
+def ketik_per_huruf(teks, delay):
+    for huruf in teks:
+        sys.stdout.write(huruf)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+def tampilkan_transisi(teks="Transisi masuk...", titik=5, delay=0.4):
+    print()
+    ketik_per_huruf(f"[{teks}]", 0.07)
+    for _ in range(titik):
+        sys.stdout.write(".")
+        sys.stdout.flush()
+        time.sleep(delay)
+    print("\n")
+    time.sleep(1.2)  
+
+def tampilkan_lirik(lirik, default_huruf, default_baris):
+    for baris in lirik:
+        huruf_delay = baris.get("huruf_delay", default_huruf)
+        baris_delay = baris.get("baris_delay", default_baris)
+        ketik_per_huruf(baris["teks"], huruf_delay)
+        time.sleep(baris_delay)
+
+
+lirik_bagian = [
+    {"teks": "For sure", "huruf_delay": 0.08, "baris_delay": 0.08},
+    {"teks": "But I know", "huruf_delay": 0.08, "baris_delay": 0.08},
+    {"teks": "You never saw me...", "huruf_delay": 0.11, "baris_delay": 1.8},
+    {"teks": "When the lights come on", "huruf_delay": 0.08, "baris_delay": 0.12},
+    {"teks": "And I'm on my own", "huruf_delay": 0.08, "baris_delay": 0.095},
+    {"teks": "Will you be there?", "huruf_delay": 0.08, "baris_delay": 0.1},
+    {"teks": "Will you be there?", "huruf_delay": 0.08, "baris_delay": 2.5},
+
+    {"teks": "Can I be", "huruf_delay": 0.08, "baris_delay": 0.08},
+    {"teks": "The one", "huruf_delay": 0.08, "baris_delay": 0.08},
+    {"teks": "You talk about", "huruf_delay": 0.08, "baris_delay": 0.9},
+    {"teks": "In all your stories?", "huruf_delay": 0.08, "baris_delay": 2.5},
+
+    {"teks": "Can I be him?", "huruf_delay": 0.1, "baris_delay": 7.08}
+]
+
+
+
+if __name__ == "__main__":
+    print("\n" + "" * 60 + "\n")
+    tampilkan_transisi("")
+    tampilkan_lirik(lirik_bagian, delay_per_huruf, delay_per_baris)
+    print("\n" + "" * 60 + "\n")
